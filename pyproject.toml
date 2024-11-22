@@ -3,10 +3,11 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "helpers"
+name = "AOC"
 version = "0.0.0"
 description = "A helper module for various utilities"
 authors = [
     { name = "Nick", email = "nick@example.com" }
 ]
-dependencies = ["ipykernel",]
+dependencies = ["ipykernel",
+                "black"]
