@@ -66,9 +66,9 @@ if __name__ == "__main__":
     for X in X_s:
         print(i, " / ", len(X_s))
         i += 1
-        positions_visited_and_directions: list[tuple[int]] = (
-            []
-        )  # in the format (x, y, d)
+        positions_visited_and_directions: list[
+            tuple[int]
+        ] = []  # in the format (x, y, d)
         direction = 0
         # da = deepcopy(data)
         da = data
