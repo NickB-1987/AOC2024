@@ -36,5 +36,4 @@ if __name__ == "__main__":
     s = 0
     for number in data:
         s += score(number, 0)
-        print(number)
     print(s)
