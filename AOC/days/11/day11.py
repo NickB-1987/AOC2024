@@ -25,7 +25,9 @@ def score(num, blinks):
     if num == 0:
         memo[(num, blinks)] = score(1, blinks + 1)
     elif ((b := len(a := str(num))) % 2) == 0:
-        memo[(num, blinks)] = score(int(a[: b // 2]), blinks + 1) + score(int(a[b // 2:]), blinks + 1)
+        memo[(num, blinks)] = score(int(a[: b // 2]), blinks + 1) + score(
+            int(a[b // 2 :]), blinks + 1
+        )
     else:
         memo[(num, blinks)] = score(2024 * num, blinks + 1)
     return score(num, blinks)

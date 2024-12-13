@@ -4,7 +4,10 @@ from queue import Queue
 day = 10
 test = 0
 
-data = [[int(x) for x in list(line.strip())] for line in open(Path(Path(__file__).parent, f"day{day}input"), "r").readlines()]
+data = [
+    [int(x) for x in list(line.strip())]
+    for line in open(Path(Path(__file__).parent, f"day{day}input"), "r").readlines()
+]
 
 maxy = len(data) - 1
 maxx = len(data[0]) - 1
@@ -12,17 +15,21 @@ maxx = len(data[0]) - 1
 zeroes = []
 scores = []
 
+
 def coord_oob(coord, direction) -> bool:
-    if ((coord[0] + direction[0]) > maxx or
-        (coord[0] + direction[0]) < 0 or
-        (coord[1] + direction[1]) > maxy or
-        (coord[1] + direction[1]) < 0):
+    if (
+        (coord[0] + direction[0]) > maxx
+        or (coord[0] + direction[0]) < 0
+        or (coord[1] + direction[1]) > maxy
+        or (coord[1] + direction[1]) < 0
+    ):
         return True
     else:
         return False
 
+
 def move(coord, direction) -> tuple[int]:
-    return ((coord[0] + direction[0], coord[1] + direction[1]))
+    return (coord[0] + direction[0], coord[1] + direction[1])
 
 
 if __name__ == "__main__":
@@ -48,7 +55,7 @@ if __name__ == "__main__":
             coords = new_coords
             i += 1
         scores.append(len(coords))
-    print("Part 1: ",sum(scores))
+    print("Part 1: ", sum(scores))
 
     # Part 2 - 81
     rating = 0
@@ -66,5 +73,3 @@ if __name__ == "__main__":
                         if data[new[1]][new[0]] == next_target:
                             q.put((next_target + 1, new))
     print(rating)
-
-
