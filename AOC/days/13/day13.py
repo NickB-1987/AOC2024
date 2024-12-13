@@ -34,9 +34,8 @@ if __name__ == "__main__":
                 b_eq=rhs_eq,
                 bounds=[(0, None), (0, None)],
                 integrality=1,
-                method="highs",
                 options={"presolve": False},
             )
             if opt.success:
-                cost += opt.fun
+                cost += int(opt.fun)
         print(cost)
