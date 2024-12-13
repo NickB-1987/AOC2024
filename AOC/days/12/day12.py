@@ -26,33 +26,32 @@ def is_neighbour(letter: str, coord: tuple[int], direction: tuple[int]) -> bool:
 
 def find_region(letter: str, coord: tuple[int]):
     squares = set()
-    edges = 0
     squares.add(coord)
     q = Queue()
     q.put(coord)
+    edges = 0
     while not q.empty():
         square = q.get()
-        edges += 4
         for direction in directions:
             if is_neighbour(letter, square, direction):
-                edges -= 1
                 new = (square[0] + direction[0], square[1] + direction[1])
                 if new not in squares:
                     q.put(new)
                 squares.add(new)
+            else:
+                edges += 1
     return squares, edges
 
 if __name__ == "__main__":
     price = 0
     already_found = set()
-    for x in range(maxx):
-        for y in range(maxy):
-            a = (x, y)
-            if a not in already_found:
+    for y in range(maxy + 1):
+        for x in range(maxx + 1):
+            if (x, y) not in already_found:
                 letter = data[y][x]
-                region, touching = find_region(letter, (x, y))
+                region, edges = find_region(letter, (x, y))
                 already_found = already_found.union(region)
-                this_price = len(region) * touching
+                this_price = len(region) * edges
                 price += this_price
     print(price)
 
