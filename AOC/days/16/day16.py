@@ -32,7 +32,7 @@ memo = set()
 if __name__ == "__main__":
     results = set()
     target_score = 10000000
-    
+
     finish = False
 
     while q.not_empty and not finish:
