@@ -44,7 +44,7 @@ memo = {}
 if __name__ == "__main__":
     results = []
     target_score = 0
-    
+
     finish = False
 
     while q.not_empty and not finish:
@@ -52,7 +52,7 @@ if __name__ == "__main__":
         # if pos in memo and memo[pos][0] == direction and memo[pos][1] <= score:
         #     continue
         # memo[pos] = (direction, score)
-        
+
         if pos == end:
             if not results:
                 target_score = score
@@ -70,7 +70,8 @@ if __name__ == "__main__":
         forward = (
             score + 1,
             (pos[0] + directions[direction][0], pos[1] + directions[direction][1]),
-            direction, path.copy()
+            direction,
+            path.copy(),
         )
         if grid[forward[1]] != "#":
             q.put(forward)
