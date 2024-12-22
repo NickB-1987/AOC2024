@@ -43,36 +43,48 @@ for y, val in enumerate(data):
             end = (x, y)
 
 
-def bfs(walls, baseline=None):
+def bfs(walls, start, baseline=None):
     visited = set()
     q = Queue()
-    q.put((0, start))
+    q.put((0, start, [start]))
     visited.add(start)
     while not q.empty():
-        pico, pos = q.get()
+        pico, pos, path = q.get()
         for direction in directions:
             new_pos = move(pos, direction)
             if new_pos == end:
-                return pico + 1
+                return pico + 1, path
             if is_valid(new_pos) and new_pos not in walls and new_pos not in visited:
                 visited.add(new_pos)
                 if baseline:
                     if (pico + 1) > (baseline - 100):
                         continue
-                q.put((pico + 1, new_pos))
+                q.put((pico + 1, new_pos, path + [new_pos]))
 
 
 if __name__ == "__main__":
-    baseline = bfs(walls)
+    baseline, path = bfs(walls, start)
+    # part1...
     savings = []
-    for idx, wall in enumerate(walls):
-        if is_surrounded(wall):
-            continue
-        if not is_valid(wall):
-            continue
-        print(f"{idx} / {len(walls)}")
-        these_walls = walls.copy()
-        these_walls.remove(wall)
-        if (a:=bfs(these_walls, baseline)):
-            savings.append(baseline - a)
+    for i, step in enumerate(path):
+        print(f"{i} / {len(path)}")
+        for d in directions:
+            if move(step, (d[0] * 2, d[1] * 2)) in path and move(step, d) in walls:
+                these_walls = walls.copy()
+                these_walls.remove(move(step, d))
+                if a := bfs(these_walls, step, baseline):
+                    savings.append(baseline - i - a[0])
     print(sum([bool(saving) for saving in savings if saving >= 100]))
+
+    # savings = []
+    # for idx, wall in enumerate(walls):
+    #     if is_surrounded(wall):
+    #         continue
+    #     if not is_valid(wall):
+    #         continue
+    #     print(f"{idx} / {len(walls)}")
+    #     these_walls = walls.copy()
+    #     these_walls.remove(wall)
+    #     if (a:=bfs(these_walls, baseline)):
+    #         savings.append(baseline - a)
+    # print(sum([bool(saving) for saving in savings if saving >= 100]))
