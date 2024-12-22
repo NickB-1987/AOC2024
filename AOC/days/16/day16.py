@@ -1,17 +1,17 @@
 from pathlib import Path
 from queue import PriorityQueue
- 
+
 day = 16
- 
+
 data = [
     list(line.strip())
     for line in open(Path(Path(__file__).parent, f"day{day}input"), "r").readlines()
 ]
- 
+
 directions = [(0, -1), (1, 0), (0, 1), (-1, 0)]
- 
+
 grid: dict[tuple[int, int], str] = {}
- 
+
 for y, line in enumerate(data):
     for x, char in enumerate(line):
         if char == "S":
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     target_score = 10000000
 
     finish = False
- 
+
     while q.not_empty and not finish:
         score, pos, direction, path = q.get()
         memo.add((pos, direction))

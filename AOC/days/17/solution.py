@@ -125,6 +125,7 @@ def cdv(literal: int) -> None:
     pointer += 2
     C = A // 2 ** combo(literal)
 
+
 def operation(opcode: int, literal: int) -> None:
     """
     Perform operation based on opcode
@@ -149,16 +150,23 @@ def operation(opcode: int, literal: int) -> None:
         case _:
             raise ValueError("Invalid opcode")
 
+
 pointer = 0
 
 if __name__ == "__main__":
-    A = -1
+    i = 0
     while output != program:
-        output = ''
+        output = ""
         pointer = 0
-        A += 1
+        i += 8
+        A = i
+        if A % 10000 == 0:
+            print(A)
         while pointer < len(program):
             opcode, literal = program[pointer], program[pointer + 1]
             operation(opcode, literal)
     print(A)
 
+
+# 760290000
+# 198100000
