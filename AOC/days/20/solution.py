@@ -1,5 +1,7 @@
 from pathlib import Path
-from queue import Queue
+from queue import PriorityQueue
+
+Queue = PriorityQueue
 
 TEST = True
 TEST = False
@@ -66,8 +68,11 @@ if __name__ == "__main__":
     for idx, wall in enumerate(walls):
         if is_surrounded(wall):
             continue
+        if not is_valid(wall):
+            continue
         print(f"{idx} / {len(walls)}")
         these_walls = walls.copy()
         these_walls.remove(wall)
-        savings.append(baseline - bfs(these_walls))
+        if (a:=bfs(these_walls, baseline)):
+            savings.append(baseline - a)
     print(sum([bool(saving) for saving in savings if saving >= 100]))
