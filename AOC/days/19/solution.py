@@ -5,9 +5,7 @@ from multiprocessing import Pool
 TEST = True
 TEST = False
 
-data = open(
-            Path(Path(__file__).parent, "test" if TEST else "input"), "r"
-        ).readlines()
+data = open(Path(Path(__file__).parent, "test" if TEST else "input"), "r").readlines()
 
 towels = data[0].strip().split(", ")
 
@@ -17,6 +15,7 @@ if TEST:
     ...
 
 memo = dict()
+
 
 def can_be_made(pattern):
     ways = 0
@@ -31,8 +30,9 @@ def can_be_made(pattern):
             ways += 1
         for towel in towels:
             if current.startswith(towel):
-                queue.put(current[len(towel):])
+                queue.put(current[len(towel) :])
     return ways
+
 
 def find_pattern(pattern: str):
     if pattern == "":
@@ -42,9 +42,10 @@ def find_pattern(pattern: str):
     ways = 0
     for towel in towels:
         if pattern.startswith(towel):
-            ways += find_pattern(pattern[len(towel):])
+            ways += find_pattern(pattern[len(towel) :])
     memo[pattern] = ways
     return ways
+
 
 if __name__ == "__main__":
     ans = [find_pattern(p) for p in patterns]
