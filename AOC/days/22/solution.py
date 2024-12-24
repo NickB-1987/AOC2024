@@ -5,13 +5,12 @@ from collections import defaultdict
 TEST = True
 TEST = False
 
-data = [
+buyers = [
     int(x)
     for x in open(
         Path(Path(__file__).parent, "test2" if TEST else "input"), "r"
     ).readlines()
 ]
-buyers = data
 
 
 def generate_next(num: int) -> int:
